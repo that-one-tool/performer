@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"forceConsistentCasingInFileNames": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"outDir": "./dist",
+		"target": "ES2022",
+		"tsBuildInfoFile": ".tsbuildinfo",
+		"types": ["node"],
+		"skipLibCheck": true,
+		"strict": true,
+		"strictNullChecks": true
+	},
+	"include": ["src/**/*.ts", "test/**/*.ts"],
+	"exclude": ["node_modules", "dist/"]
+}
