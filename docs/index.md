@@ -1,10 +1,8 @@
 # Introducing Performer
 
-A lightweight tool to evaluate your JS/TS code performance
-
 ## Objective
 
-Performer aims at catching regressions you could introduce in your code, as well as check the performances in the first place. By using Performer in your unit tests, you can create performance regression tests, that will help you to avoid missing code changes that might harm your code performances very quickly. Using Performer in this case will allow you to safely refactor your code without the risk of introducing changes that might affect performances that you could miss before going live on production.
+Performer aims at catching regressions you could introduce in your code, as well as check the performances in the first place. By using Performer in your unit tests, you can create performance regression tests, that will help you to avoid missing code changes that might harm your code performances very quickly. Using Performer in this case will allow you to **safely refactor** or **reliably optimize** your code without the risk of introducing changes that might affect performances that you could miss before going live on production.
 
 Performer is meant to **benchmark code you control**: to get the most reliable results, you must make sure to properly mock any external service that you code is using (e.g. database calls, etc.).
 
@@ -15,13 +13,13 @@ Performer does not use any dependency, and solely rely on Performance and Proces
 
 ## Usage
 
-1. Install Performer (as a dev dependency)
+- Install Performer (as a dev dependency)
 
 ```sh
 npm i -D @that-one-tool/performer
 ```
 
-2. Import and create a Performer instance
+- Import and create a Performer instance
 
 ```typescript
 // ESM
@@ -37,7 +35,7 @@ const performer = new Performer();
 
 **Note:** A Performer instance must be created since it must retain recorded metrics during benchmarks.
 
-3. Benchmark a function
+- Benchmark a function
 
 ```typescript
 // Benchmark a synchronous function (add), running it 10 times max (default) in a 1000ms max (default) time frame
@@ -47,14 +45,14 @@ const results = performer.benchmarkFunction(add(1, 2));
 const results = performer.benchmarkAsyncFunction(() => foo.bar(), 50, 2000);
 ```
 
-4. Use benchmark results
+- Use benchmark results
 
 ```typescript
 // Check the code is executing under 10ms on average
 assert.ok(results.getExecutionTimeStats().avg < 10);
 ```
 
-5. Clear Performer after a test suit
+- Clear Performer after a test suit
 
 ```typescript
 // Between test suits
