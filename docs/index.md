@@ -1,5 +1,20 @@
 # Introducing Performer
 
+## Table of contents
+
+- [Introducing Performer](#introducing-performer)
+  - [Table of contents](#table-of-contents)
+  - [Objective](#objective)
+  - [Usage](#usage)
+  - [Benchmark: Arguments and Results](#benchmark-arguments-and-results)
+    - [Arguments](#arguments)
+    - [Results](#results)
+  - [Utilities](#utilities)
+    - [Create arrays for use in benchmarks](#create-arrays-for-use-in-benchmarks)
+  - [Real world example](#real-world-example)
+  - [Contribute](#contribute)
+  - [Keywords](#keywords)
+
 ## Objective
 
 Performer aims at catching regressions you could introduce in your code, as well as check the performances in the first place. By using Performer in your unit tests, you can create performance regression tests, that will help you to avoid missing code changes that might harm your code performances very quickly. Using Performer in this case will allow you to **safely refactor** or **reliably optimize** your code without the risk of introducing changes that might affect performances that you could miss before going live on production.
@@ -10,6 +25,8 @@ When benchmarking a function, it will be instrumented so it can track **Executio
 You can then use these stats as you want in your tests to ensure your code's performance is watched and validated.
 
 Performer does not use any dependency, and solely rely on Performance and Process APIs. It has been thought to be run in Node.js in unit tests, and is not recommend for use in production code or in the browser.
+
+Performance has been inspired by tools like [JSPerf](https://jsperf.app/) and [Benchmark.js](https://benchmarkjs.com/) (which are very often used sporadically only), as well as **professional experience**, leading to its creation to bring more complete and exploitable benchmarking into code testing, in order to improve code robustness and complete experienced code reviews.
 
 ## Usage
 
@@ -109,11 +126,25 @@ createRandomNumberArray(size): number[]
 createRandomStringArray(size): string[]
 ```
 
+## Real world example
+
+Once upon a time, a seemingly harmless refactor was attempted. In order to zip 2 arrays into a key/value pair object, a `zip` utility function was developed, relying on the `reduce` built-in function. Even though `reduce` might help to improve readability, an incorrect usage can lead to huge performance impact.
+
+The introduced code was the following:
+
+```typescript
+return arrayA.reduce((obj, val, i) => {
+	return { ...obj, [arrayA[i]]: arrayB[i] };
+}, {});
+```
+
+Luckily, advised reviewer catched this before it was merged into the code base. The use of reduce here in addition to the spread operator on an ever growing object leads to copying over and over the data, overloading the memory and using a lot of CPU. Instead of using a simple for loop, taking about 1ms (and just a couple of kB) for 1500 string entries, this code takes about 150ms (plus about 6MB of memory) for the same 1500 entries. When this code lies in a script intended for high performance, this can become really harmful (and expensive).
+
+By adding a simple performance test of the code, which breaks when the code takes more than `X`ms to run, or more than `Y`MB of memory is used, this simple change can be catched even before going into review (since the difference is really important).
+
 ## Contribute
 
 Please feel free to suggest improvements, features or bug fix through Git issues. Pull Requests for that are also more than welcome.
-
-https://github.com/that-one-tool/performer
 
 ## Keywords
 

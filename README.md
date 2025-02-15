@@ -24,6 +24,11 @@
 	<span>
 		<img src="https://img.shields.io/badge/coverage-98%25-success" alt="Coverage" />
 	</span>
+	<br/>
+	<br/>
+	<a href="https://that-one-tool.github.io/performer/">
+		<img src="https://img.shields.io/badge/Documentation-Performer-blue?logo=github" alt="Performer documentation" />
+	</a>
 </div>
 
 ## Objective
