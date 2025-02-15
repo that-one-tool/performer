@@ -138,9 +138,9 @@ return arrayA.reduce((obj, val, i) => {
 }, {});
 ```
 
-Luckily, advised reviewer catched this before it was merged into the code base. The use of reduce here in addition to the spread operator on an ever growing object leads to copying over and over the data, overloading the memory and using a lot of CPU. Instead of using a simple for loop, taking about 1ms (and just a couple of kB) for 1500 string entries, this code takes about 150ms (plus about 6MB of memory) for the same 1500 entries. When this code lies in a script intended for high performance, this can become really harmful (and expensive).
+Luckily, advised reviewer caught this before it was merged into the code base. The use of reduce here in addition to the spread operator on an ever growing object leads to copying over and over the data, overloading the memory and using a lot of CPU. Instead of using a simple for loop, taking about 1ms (and just a couple of kB) for 1500 string entries, this code takes about 150ms (plus about 6MB of memory) for the same 1500 entries. When this code lies in a script intended for high performance, this can become really harmful (and expensive).
 
-By adding a simple performance test of the code, which breaks when the code takes more than `X`ms to run, or more than `Y`MB of memory is used, this simple change can be catched even before going into review (since the difference is really important).
+By adding a simple performance test of the code, which breaks when the code takes more than `X`ms to run, or more than `Y`MB of memory is used, the regression introduced with this simple change can be caught even before going into review (since the difference is really important).
 
 ## Contribute
 
