@@ -1,6 +1,6 @@
 {
 	"name": "@that-one-tool/performer",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A lightweight tool to evaluate your JS/TS code performance",
 	"exports": {
 		".": {
@@ -16,9 +16,7 @@
 		"LICENSE"
 	],
 	"scripts": {
-		"add_cjs_package_json": "echo {\"type\": \"commonjs\"} > ./dist/cjs/package.json",
-		"add_esm_package_json": "echo {\"type\": \"module\"} > ./dist/esm/package.json",
-		"add_all_package_json": "npm run add_cjs_package_json && npm run add_esm_package_json",
+		"add_all_package_json": "cp -r ./dist-package-files/* ./dist",
 		"build": "rm -rf ./dist && tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json && npm run add_all_package_json",
 		"format": "prettier . --write",
 		"lint": "eslint .",
