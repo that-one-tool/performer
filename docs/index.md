@@ -3,17 +3,17 @@
 ## Table of contents
 
 - [Introducing Performer](#introducing-performer)
-  - [Table of contents](#table-of-contents)
-  - [Objective](#objective)
-  - [Usage](#usage)
-  - [Benchmark: Arguments and Results](#benchmark-arguments-and-results)
-    - [Arguments](#arguments)
-    - [Results](#results)
-  - [Utilities](#utilities)
-    - [Create arrays for use in benchmarks](#create-arrays-for-use-in-benchmarks)
-  - [Real world example](#real-world-example)
-  - [Contribute](#contribute)
-  - [Keywords](#keywords)
+    - [Table of contents](#table-of-contents)
+    - [Objective](#objective)
+    - [Usage](#usage)
+    - [Benchmark: Arguments and Results](#benchmark-arguments-and-results)
+        - [Arguments](#arguments)
+        - [Results](#results)
+    - [Utilities](#utilities)
+        - [Create arrays for use in benchmarks](#create-arrays-for-use-in-benchmarks)
+    - [Real world example](#real-world-example)
+    - [Contribute](#contribute)
+    - [Keywords](#keywords)
 
 ## Objective
 
@@ -134,7 +134,7 @@ The introduced code was the following:
 
 ```typescript
 return arrayA.reduce((obj, val, i) => {
-	return { ...obj, [arrayA[i]]: arrayB[i] };
+	return { ...obj, [val]: arrayB[i] };
 }, {});
 ```
 
